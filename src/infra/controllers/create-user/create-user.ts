@@ -15,15 +15,21 @@ export class CreateUserController implements ICreateUserController {
   async execute(
     httpRequest: HttpRequest<CreateUserProps>
   ): Promise<HttpResponse<User>> {
-    try {
-      if (!httpRequest.body) {
+    const requiredFields = ['name','email', 'adress'];
+
+    // if fields is valid
+    for (const field of requiredFields) {
+      if (!httpRequest?.body?.[field as keyof CreateUserProps]?.length) {
         return {
           statusCode: 400,
-          body: 'Please specify a body',
+          body: `Field ${field} is required`,
         };
-      }
+      } 
+    }
+
+    try {
       const newUser: User = {
-        ...httpRequest.body,
+        ...httpRequest.body!,
         bag: {
           items: [],
         }
