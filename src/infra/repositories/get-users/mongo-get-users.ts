@@ -6,7 +6,11 @@ export class MongoGetUsersRepository implements IGetUsersRepository {
   constructor(private _model: UserODM = new UserODM()) {}
 
   async getUsers(): Promise<User[]> {
-    const users = await this._model.getAll();
-    return users;
+    try {
+      const users = await this._model.getAll();
+      return users;
+    } catch {
+      throw new Error('Internal Error');
+    }
   }
 }

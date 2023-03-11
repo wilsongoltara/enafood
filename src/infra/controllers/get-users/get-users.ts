@@ -14,11 +14,11 @@ export class GetUserController implements IGetUserController {
         statusCode: 200,
         body: users,
       };
-    } catch (e) {
-      console.log(e);
+    } catch (e: unknown) {
+      const err = e as Error;
       return {
         statusCode: 500,
-        body: 'Something went wrong',
+        body: err.message,
       };
     }
   }
