@@ -4,6 +4,6 @@ export interface User {
   email: string;
   adress: string;
   bag: {
-    items: [];
+    items: Array<any>;
   }
 }
