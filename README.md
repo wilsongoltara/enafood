@@ -66,3 +66,11 @@ Essas entidades estão interligadas entre si de acordo com a lógica de negócio
 - Os usuários podem obter listas de produtos disponíveis, e adicionar itens à sacola
 - Os usuários podem manipular a sacola(inserir, atualizar quantidades, remover)
 - Os usuários podem finalizar o pedido e escolher o endereço de entrega e a forma de pagamento
+
+
+## Variáveis de ambiente
+
+```
+PORT=8000
+MONGODB_URL=mongodb://localhost:27017/
+```
