@@ -27,14 +27,14 @@ export class UpdateUserController implements IUpdateUserController {
       if (somefiledIsNotAllowedToUpdate) {
         return {
           statusCode: 400,
-          body: '',
+          body: 'Bad request',
         };
       }
 
       const userUpdated = await this.updateUserRepository.updateUser(id, body);
 
       return {
-        statusCode: 203,
+        statusCode: 200,
         body: userUpdated,
       }
     } catch (e: unknown) {
