@@ -30,9 +30,7 @@ export class CreateUserController implements ICreateUserController {
     try {
       const newUser: User = {
         ...httpRequest.body!,
-        bag: {
-          items: [],
-        }
+        bag: []
       };
 
       const userAdded = await this.createUserRepository.createUser(newUser);

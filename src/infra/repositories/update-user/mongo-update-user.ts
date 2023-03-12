@@ -9,7 +9,7 @@ export class MongoUpdateUserRepository implements IUpdateUserRepository {
     const userUpdated = await this._model.updateById(id, props);
   
     if (!userUpdated) {
-      throw new Error('Internal Error');
+      throw new Error('Userid not exist');
     }
 
     return userUpdated; 

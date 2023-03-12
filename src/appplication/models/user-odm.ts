@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import { AbstractODM } from './asbract-odm';
 import { User } from '../interfaces/user';
+import { AbstractODM } from './asbract-odm';
 
 export class UserODM extends AbstractODM<User> {
   constructor() {
@@ -18,9 +18,7 @@ export class UserODM extends AbstractODM<User> {
         required: true,
       },
       bag: {
-        items: {
-          type: Array,
-        },
+        type: [{ item: String, quantity: Number }],
       },
     });
 
