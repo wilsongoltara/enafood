@@ -1,6 +1,6 @@
-import { ICreateUserRepository } from '~/infra/controllers/create-user/protocols';
 import { User } from '~/appplication/interfaces/user';
 import { UserODM } from '~/appplication/models/user-odm';
+import { ICreateUserRepository } from '~/infra/controllers/create-user/protocols';
 
 export class MongoCreateUserRepository implements ICreateUserRepository {
   constructor(private _model: UserODM = new UserODM()) {}

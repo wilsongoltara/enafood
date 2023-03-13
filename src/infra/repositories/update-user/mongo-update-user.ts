@@ -6,13 +6,17 @@ export class MongoUpdateUserRepository implements IUpdateUserRepository {
   constructor(private _model: UserODM = new UserODM()) {}
 
   async updateUser(id: string, props: UpdateUserProps): Promise<User> {
-    const userUpdated = await this._model.updateById(id, props);
-  
-    if (!userUpdated) {
-      throw new Error('UserId not exist');
-    }
+    try {
+      const userUpdated = await this._model.updateById(id, props);
+    
+      if (!userUpdated) {
+        throw new Error('User not found');
+      }
 
-    return userUpdated; 
+      return userUpdated; 
+    } catch {
+      throw new Error('Internal Error')
+    }
   }
 
 }
