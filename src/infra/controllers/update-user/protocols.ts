@@ -1,5 +1,4 @@
-import { User } from "~/appplication/interfaces/user";
-import { HttpRequest, HttpResponse } from "../protocols";
+import { User } from '~/appplication/interfaces/user';
 
 export interface UpdateUserProps {
   name?: string;
@@ -8,9 +7,5 @@ export interface UpdateUserProps {
 }
 
 export interface IUpdateUserRepository {
-  updateUser(id :string, props: UpdateUserProps): Promise<User>;
-}
-
-export interface IUpdateUserController {
-  execute(httpRequest: HttpRequest<any>): Promise<HttpResponse<User>>;
+  updateUser(id: string, props: UpdateUserProps): Promise<User>;
 }

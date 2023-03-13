@@ -1,17 +1,13 @@
 import { MongoAddItemBagRepository } from '~/infra/repositories/add-item-bag/mongo-add-item-bag';
-import { HttpRequest } from '../protocols';
-import {
-  AddItemToBagProps,
-  IAddItemToBagController,
-  IAddItemToBagRepository,
-} from './protocols';
+import { HttpRequest, IController } from '../protocols';
+import { AddItemToBagProps, IAddItemToBagRepository } from './protocols';
 
-export class AddItemToBagController implements IAddItemToBagController {
+export class AddItemToBagController implements IController {
   constructor(
     private readonly addItemBagRepository: IAddItemToBagRepository = new MongoAddItemBagRepository()
   ) {}
 
-  async execute(httpRequest: HttpRequest<any>) {
+  async execute(httpRequest: HttpRequest<AddItemToBagProps>) {
     try {
       const id = httpRequest?.params?.id;
       const body = httpRequest?.body;
@@ -20,6 +16,13 @@ export class AddItemToBagController implements IAddItemToBagController {
         return {
           statusCode: 400,
           body: 'Missing user id',
+        };
+      }
+
+      if (!body) {
+        return {
+          statusCode: 400,
+          body: 'Missing fields',
         };
       }
 

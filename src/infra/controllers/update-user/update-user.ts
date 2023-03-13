@@ -1,13 +1,16 @@
+import { User } from '~/appplication/interfaces/user';
 import { MongoUpdateUserRepository } from '~/infra/repositories/update-user/mongo-update-user';
-import { HttpRequest } from '../protocols';
-import { IUpdateUserController, IUpdateUserRepository } from './protocols';
+import { HttpRequest, HttpResponse, IController } from '../protocols';
+import { IUpdateUserRepository, UpdateUserProps } from './protocols';
 
-export class UpdateUserController implements IUpdateUserController {
+export class UpdateUserController implements IController {
   constructor(
     private readonly updateUserRepository: IUpdateUserRepository = new MongoUpdateUserRepository()
   ) {}
 
-  async execute(httpRequest: HttpRequest<any>) {
+  async execute(
+    httpRequest: HttpRequest<UpdateUserProps>
+  ): Promise<HttpResponse<User>> {
     try {
       const id = httpRequest?.params?.id;
       const body = httpRequest?.body;
@@ -16,6 +19,13 @@ export class UpdateUserController implements IUpdateUserController {
         return {
           statusCode: 400,
           body: 'Missing user id',
+        };
+      }
+
+      if (!body) {
+        return {
+          statusCode: 400,
+          body: 'Missing fields',
         };
       }
 
@@ -36,7 +46,7 @@ export class UpdateUserController implements IUpdateUserController {
       return {
         statusCode: 200,
         body: userUpdated,
-      }
+      };
     } catch (e: unknown) {
       const err = e as Error;
       return {

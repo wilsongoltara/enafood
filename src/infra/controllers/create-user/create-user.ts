@@ -1,13 +1,9 @@
 import { User } from '~/appplication/interfaces/user';
 import { MongoCreateUserRepository } from '~/infra/repositories/create-user/mongo-create-user';
-import { HttpRequest, HttpResponse } from '../protocols';
-import {
-  CreateUserProps,
-  ICreateUserController,
-  ICreateUserRepository,
-} from './protocols';
+import { HttpRequest, HttpResponse, IController } from '../protocols';
+import { CreateUserProps, ICreateUserRepository } from './protocols';
 
-export class CreateUserController implements ICreateUserController {
+export class CreateUserController implements IController {
   constructor(
     private readonly createUserRepository: ICreateUserRepository = new MongoCreateUserRepository()
   ) {}
@@ -15,7 +11,7 @@ export class CreateUserController implements ICreateUserController {
   async execute(
     httpRequest: HttpRequest<CreateUserProps>
   ): Promise<HttpResponse<User>> {
-    const requiredFields = ['name','email', 'adress'];
+    const requiredFields = ['name', 'email', 'adress'];
 
     // if fields is valid
     for (const field of requiredFields) {
@@ -24,13 +20,13 @@ export class CreateUserController implements ICreateUserController {
           statusCode: 400,
           body: `Field ${field} is required`,
         };
-      } 
+      }
     }
 
     try {
       const newUser: User = {
         ...httpRequest.body!,
-        bag: []
+        bag: [],
       };
 
       const userAdded = await this.createUserRepository.createUser(newUser);

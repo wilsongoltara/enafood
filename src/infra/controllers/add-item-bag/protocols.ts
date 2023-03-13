@@ -12,7 +12,3 @@ export interface AddItemToBagResponse {
 export interface IAddItemToBagRepository {
   addItemToBag(userId: string, props: AddItemToBagProps): Promise<AddItemToBagResponse>;
 }
-
-export interface IAddItemToBagController {
-  execute(httpRequest: HttpRequest<any>): Promise<HttpResponse<AddItemToBagResponse>>;
-}
