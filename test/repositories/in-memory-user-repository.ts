@@ -3,11 +3,12 @@ import {
   AddItemToBagProps,
   AddItemToBagResponse,
   IAddItemToBagRepository,
-} from '~/infra/controllers/add-item-bag/protocols';
+} from '~/infra/controllers/user/add-item-bag/protocols';
 import {
   CreateUserProps,
   ICreateUserRepository,
 } from '~/infra/controllers/user/create-user/protocols';
+import { IDeleteUserRepository } from '~/infra/controllers/user/delete-user/protocols';
 import { IGetUsersRepository } from '~/infra/controllers/user/get-users/protocols';
 import {
   IUpdateUserRepository,
@@ -78,12 +79,28 @@ export class InMemoryAddItemToBagRepository implements IAddItemToBagRepository {
   ): Promise<AddItemToBagResponse> {
     const user = this.users.find((user) => user?.id === userId);
 
-    if (!user) throw new Error('UserId not exist');
+    if (!user) throw new Error('User not found');
 
     user.bag.push(props);
 
     this.save(user);
 
     return { bag: user.bag };
+  }
+}
+
+export class InMemoryDeleteUserRepository implements IDeleteUserRepository {
+  public users: User[] = [];
+
+  async deleteUser(id: string): Promise<User> {
+    const userIndex = this.users.findIndex((_user) => _user.id === id);
+
+    if (userIndex === -1) throw new Error('User not found');
+
+    const userDeleted = this.users[userIndex];
+
+    this.users = this.users.filter((_user) => _user.id !== id);
+
+    return userDeleted;
   }
 }
