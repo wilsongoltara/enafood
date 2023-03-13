@@ -1,9 +1,10 @@
 import { User } from '~/appplication/interfaces/user';
 import {
   CreateUserProps,
-  ICreateUserRepository,
+  ICreateUserRepository
 } from '~/infra/controllers/create-user/protocols';
 import { IGetUsersRepository } from '~/infra/controllers/get-users/protocols';
+import { IUpdateUserRepository, UpdateUserProps } from '~/infra/controllers/update-user/protocols';
 
 export class InMemoryGetUsersRepository implements IGetUsersRepository {
   public users: User[] = [];
@@ -16,12 +17,10 @@ export class InMemoryGetUsersRepository implements IGetUsersRepository {
 export class InMemoryCreateUserRepository implements ICreateUserRepository {
   public users: User[] = [];
 
-  async createUser(user: CreateUserProps): Promise<User> {
+  async createUser(props: CreateUserProps): Promise<User> {
     const newUser: User = {
-      ...user,
-      bag: {
-        items: [],
-      },
+      ...props,
+      bag: [],
     };
 
     this.users.push(newUser);
@@ -30,24 +29,29 @@ export class InMemoryCreateUserRepository implements ICreateUserRepository {
   }
 }
 
-// async findById(userId: string): Promise<User | null> {
-//   const user = this.users.find((user) => user.value.id === userId);
+export class InMemoryUpdateUserRepository implements IUpdateUserRepository {
+  public users: User[] = [];
 
-//   if (!user) return null;
+  async save(user: User): Promise<void> {
+    const userIndex = this.users.findIndex(
+      (_user) => _user.id === user.id
+    );
+  
+    if (userIndex >= 0) {
+      this.users[userIndex] = user;
+    }
+  }
 
-//   return user;
-// }
+  async updateUser(userId: string, props: UpdateUserProps): Promise<User> {
+    const user = this.users.find((user) => user?.id === userId);
 
-// async create(user: User): Promise<void> {
-//   this.users.push(user);
-// }
+    if (!user) throw new Error('UserId not exist');
 
-// async save(user: User): Promise<void> {
-//   const userIndex = this.users.findIndex(
-//     (_user) => _user.value.id === user.value.id
-//   );
+    const userUpdated = { ...user, ...props };
 
-//   if (userIndex >= 0) {
-//     this.users[userIndex] = user;
-//   }
-// }
+    this.save(userUpdated);
+
+    return userUpdated;
+  }
+}
+

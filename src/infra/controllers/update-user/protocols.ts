@@ -1,14 +1,14 @@
 import { User } from "~/appplication/interfaces/user";
 import { HttpRequest, HttpResponse } from "../protocols";
 
-export interface UpdadeUserProps {
+export interface UpdateUserProps {
   name?: string;
   email?: string;
   adress?: string;
 }
 
 export interface IUpdateUserRepository {
-  updateUser(id:string, props: UpdadeUserProps): Promise<User>;
+  updateUser(id :string, props: UpdateUserProps): Promise<User>;
 }
 
 export interface IUpdateUserController {
