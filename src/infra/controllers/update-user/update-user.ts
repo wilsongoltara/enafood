@@ -1,5 +1,6 @@
 import { User } from '~/appplication/interfaces/user';
 import { MongoUpdateUserRepository } from '~/infra/repositories/update-user/mongo-update-user';
+import { badRequest, internalError, ok } from '../helpers';
 import { HttpRequest, HttpResponse, IController } from '../protocols';
 import { IUpdateUserRepository, UpdateUserProps } from './protocols';
 
@@ -10,23 +11,17 @@ export class UpdateUserController implements IController {
 
   async execute(
     httpRequest: HttpRequest<UpdateUserProps>
-  ): Promise<HttpResponse<User>> {
+  ): Promise<HttpResponse<User | string>> {
     try {
       const id = httpRequest?.params?.id;
       const body = httpRequest?.body;
 
       if (!id) {
-        return {
-          statusCode: 400,
-          body: 'Missing user id',
-        };
+        return badRequest('Missing user id');
       }
 
       if (!body) {
-        return {
-          statusCode: 400,
-          body: 'Missing fields',
-        };
+        return badRequest('Missing fields');
       }
 
       const allowedFieldsToUpdate = ['name', 'email', 'adress'];
@@ -35,24 +30,14 @@ export class UpdateUserController implements IController {
       );
 
       if (somefiledIsNotAllowedToUpdate) {
-        return {
-          statusCode: 400,
-          body: 'Bad request',
-        };
+        return badRequest('Some received field is not allowed');
       }
 
       const userUpdated = await this.updateUserRepository.updateUser(id, body);
 
-      return {
-        statusCode: 200,
-        body: userUpdated,
-      };
-    } catch (e: unknown) {
-      const err = e as Error;
-      return {
-        statusCode: 400,
-        body: err.message,
-      };
+      return ok<User>(userUpdated);
+    } catch {
+      return internalError();
     }
   }
 }

@@ -1,5 +1,6 @@
 import { User } from '~/appplication/interfaces/user';
 import { MongoCreateUserRepository } from '~/infra/repositories/create-user/mongo-create-user';
+import { badRequest, created, internalError } from '../helpers';
 import { HttpRequest, HttpResponse, IController } from '../protocols';
 import { CreateUserProps, ICreateUserRepository } from './protocols';
 
@@ -10,35 +11,26 @@ export class CreateUserController implements IController {
 
   async execute(
     httpRequest: HttpRequest<CreateUserProps>
-  ): Promise<HttpResponse<User>> {
-    const requiredFields = ['name', 'email', 'adress'];
-
-    // if fields is valid
-    for (const field of requiredFields) {
-      if (!httpRequest?.body?.[field as keyof CreateUserProps]?.length) {
-        return {
-          statusCode: 400,
-          body: `Field ${field} is required`,
-        };
-      }
-    }
-
+  ): Promise<HttpResponse<User | string>> {
     try {
+      const requiredFields = ['name', 'email', 'adress'];
+
+      for (const field of requiredFields) {
+        if (!httpRequest?.body?.[field as keyof CreateUserProps]?.length) {
+          return badRequest(`Field ${field} is required`);
+        }
+      }
+
       const newUser: User = {
         ...httpRequest.body!,
         bag: [],
       };
 
       const userAdded = await this.createUserRepository.createUser(newUser);
-      return {
-        statusCode: 201,
-        body: userAdded,
-      };
-    } catch (e) {
-      return {
-        statusCode: 500,
-        body: 'Something went wrong.',
-      };
+
+      return created<User>(userAdded);
+    } catch {
+      return internalError();
     }
   }
 }

@@ -82,5 +82,5 @@ test('No update user with invalid props', async () => {
   });
 
   expect(statusCode).toEqual(400);
-  expect(body).toEqual('Bad request');
+  expect(body).toEqual('Some received field is not allowed');
 }); 
