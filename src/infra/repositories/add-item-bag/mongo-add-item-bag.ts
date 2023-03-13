@@ -18,8 +18,13 @@ export class MongoAddItemBagRepository implements IAddItemToBagRepository {
       if (!userWithBag) {
         throw new Error('Missing user id');
       }
-      
-      userWithBag.bag.push(props);
+
+      const positionItem = userWithBag.bag.findIndex((itemBag) => itemBag.item === props.item);
+      if (positionItem !== -1) {
+        userWithBag.bag[positionItem].quantity += props.quantity;
+      } else {
+        userWithBag.bag.push(props);
+      }
   
       const userUpdated = await this._model.updateById(userId, userWithBag);
   
