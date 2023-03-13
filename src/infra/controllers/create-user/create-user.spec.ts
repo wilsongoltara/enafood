@@ -32,5 +32,5 @@ test('no create user without props', async () => {
   const { statusCode, body } = await createUserController.execute({});
 
   expect(statusCode).toEqual(400);
-  expect(body).toEqual('Please specify a body');
+  expect(body).toEqual('Field name is required');
 });
