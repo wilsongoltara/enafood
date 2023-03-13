@@ -22,8 +22,9 @@ export class DeleteUserController implements IController {
       const user = await this.deleteUserRepository.deleteUser(id);
 
       return ok<User>(user);
-    } catch {
-      return internalError();
+    } catch (err) {
+      const e = err as Error;
+      return internalError(e.message);
     }
   }
 }

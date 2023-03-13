@@ -29,8 +29,9 @@ export class CreateUserController implements IController {
       const userAdded = await this.createUserRepository.createUser(newUser);
 
       return created<User>(userAdded);
-    } catch {
-      return internalError();
+    } catch (err) {
+      const e = err as Error;
+      return internalError(e.message);
     }
   }
 }

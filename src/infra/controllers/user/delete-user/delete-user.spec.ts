@@ -31,8 +31,6 @@ test('delete user', async () => {
     params: { id: user1.id },
   });
 
-  console.log(body);
-
   expect(statusCode).toEqual(200);
   expect(body).toEqual(user1);
   expect(inMemoryDeleteUserRepository.users.length).toEqual(1);

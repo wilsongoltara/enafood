@@ -26,8 +26,9 @@ export class RegisterProductController implements IController {
       );
 
       return created<Product>(userAdded);
-    } catch {
-      return internalError();
+    } catch (err) {
+      const e = err as Error;
+      return internalError(e.message);
     }
   }
 }

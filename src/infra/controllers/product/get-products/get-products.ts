@@ -14,8 +14,9 @@ export class GetProductsController implements IController {
       const products = await this.getProductsRepository.getProducts();
 
       return ok<Product[]>(products);
-    } catch {
-      return internalError();
+    } catch (err) {
+      const e = err as Error;
+      return internalError(e.message);
     }
   }
 }

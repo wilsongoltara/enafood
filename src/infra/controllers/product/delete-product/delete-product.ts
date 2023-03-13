@@ -19,11 +19,12 @@ export class DeleteProductController implements IController {
         return badRequest('Missing product id');
       }
 
-      const Product = await this.deleteProductRepository.deleteProduct(id);
+      const product = await this.deleteProductRepository.deleteProduct(id);
 
-      return ok<Product>(Product);
-    } catch {
-      return internalError();
+      return ok<Product>(product);
+    } catch (err) {
+      const e = err as Error;
+      return internalError(e.message);
     }
   }
 }

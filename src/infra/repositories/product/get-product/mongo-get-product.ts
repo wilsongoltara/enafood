@@ -14,8 +14,9 @@ export class MongoGetProductByIdRepository
       if (!product) throw new Error('Product not found');
 
       return product;
-    } catch {
-      throw new Error('Internal Error');
+    } catch(err) {
+      const e = err as Error
+      throw new Error(e.message);
     }
   }
 }

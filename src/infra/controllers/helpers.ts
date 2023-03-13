@@ -21,9 +21,9 @@ export const created = <T>(body: T): HttpResponse<T> => {
   };
 };
 
-export const internalError = (): HttpResponse<string> => {
+export const internalError = (message: string): HttpResponse<string> => {
   return {
     statusCode: HttpStatusCode.INTERNAL_ERROR,
-    body: 'Something went wrong',
+    body: message,
   };
 };

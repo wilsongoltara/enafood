@@ -39,8 +39,9 @@ export class UpdateProductController implements IController {
       );
 
       return ok<Product>(productUpdated);
-    } catch {
-      return internalError();
+    } catch (err) {
+      const e = err as Error;
+      return internalError(e.message);
     }
   }
 }

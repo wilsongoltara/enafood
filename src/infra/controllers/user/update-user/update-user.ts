@@ -36,8 +36,9 @@ export class UpdateUserController implements IController {
       const userUpdated = await this.updateUserRepository.updateUser(id, body);
 
       return ok<User>(userUpdated);
-    } catch {
-      return internalError();
+    } catch (err) {
+      const e = err as Error;
+      return internalError(e.message);
     }
   }
 }

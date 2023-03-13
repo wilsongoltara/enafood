@@ -38,8 +38,9 @@ export class AddItemToBagController implements IController {
       const bagUpdated = await this.addItemBagRepository.addItemToBag(id, body);
 
       return ok<AddItemToBagResponse>(bagUpdated);
-    } catch {
-      return internalError();
+    } catch (err) {
+      const e = err as Error;
+      return internalError(e.message);
     }
   }
 }

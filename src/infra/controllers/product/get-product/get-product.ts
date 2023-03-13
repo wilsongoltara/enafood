@@ -20,8 +20,9 @@ export class GetProductByIdController implements IController {
       const product = await this.getProductRepository.getProductById(id);
 
       return ok<Product>(product);
-    } catch {
-      return internalError();
+    } catch (err) {
+      const e = err as Error;
+      return internalError(e.message);
     }
   }
 }
