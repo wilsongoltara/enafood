@@ -1,15 +1,15 @@
 import { User } from "~/appplication/interfaces/user";
 import { UserODM } from "~/appplication/models/user-odm";
-import { IUpdateUserRepository, UpdadeUserProps } from "~/infra/controllers/update-user/protocols";
+import { IUpdateUserRepository, UpdateUserProps } from "~/infra/controllers/update-user/protocols";
 
 export class MongoUpdateUserRepository implements IUpdateUserRepository {
   constructor(private _model: UserODM = new UserODM()) {}
 
-  async updateUser(id: string, props: UpdadeUserProps): Promise<User> {
+  async updateUser(id: string, props: UpdateUserProps): Promise<User> {
     const userUpdated = await this._model.updateById(id, props);
   
     if (!userUpdated) {
-      throw new Error('Userid not exist');
+      throw new Error('UserId not exist');
     }
 
     return userUpdated; 

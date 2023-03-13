@@ -40,7 +40,7 @@ export class UpdateUserController implements IUpdateUserController {
     } catch (e: unknown) {
       const err = e as Error;
       return {
-        statusCode: 500,
+        statusCode: 400,
         body: err.message,
       };
     }
