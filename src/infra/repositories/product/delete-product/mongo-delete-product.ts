@@ -20,8 +20,9 @@ export class MongoDeleteProductRepository implements IDeleteProductRepository {
       }
 
       return productDeleted;
-    } catch {
-      throw new Error('Internal Error');
+    } catch(err) {
+      const e = err as Error
+      throw new Error(e.message);
     }
   }
 }

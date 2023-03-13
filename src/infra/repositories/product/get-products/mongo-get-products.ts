@@ -10,8 +10,9 @@ export class MongoGetProductsRepository implements IGetProductsRepository {
       const products = await this._model.getAll();
 
       return products;
-    } catch {
-      throw new Error('Internal Error');
+    } catch(err) {
+      const e = err as Error
+      throw new Error(e.message);
     }
   }
 }

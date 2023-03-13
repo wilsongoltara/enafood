@@ -36,8 +36,9 @@ export class MongoAddItemBagRepository implements IAddItemToBagRepository {
       }
 
       return { bag: userUpdated.bag };
-    } catch {
-      throw new Error('Internal Error');
+    } catch(err) {
+      const e = err as Error
+      throw new Error(e.message);
     }
   }
 }

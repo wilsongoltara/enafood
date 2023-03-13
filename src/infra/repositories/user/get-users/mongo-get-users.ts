@@ -9,8 +9,9 @@ export class MongoGetUsersRepository implements IGetUsersRepository {
     try {
       const users = await this._model.getAll();
       return users;
-    } catch {
-      throw new Error('Internal Error');
+    } catch(err) {
+      const e = err as Error
+      throw new Error(e.message);
     }
   }
 }

@@ -9,8 +9,9 @@ export class MongoRegisterProductRepository implements IRegisterProductRepositor
     try {
       const newProduct = await this._model.insert(product);
       return newProduct;
-    } catch {
-      throw new Error('Internal Error');
+    } catch(err) {
+      const e = err as Error
+      throw new Error(e.message);
     }
   }
 }

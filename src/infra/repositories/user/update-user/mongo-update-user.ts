@@ -17,8 +17,9 @@ export class MongoUpdateUserRepository implements IUpdateUserRepository {
       }
 
       return userUpdated;
-    } catch {
-      throw new Error('Internal Error');
+    } catch(err) {
+      const e = err as Error
+      throw new Error(e.message);
     }
   }
 }
