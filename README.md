@@ -2,7 +2,6 @@
 
 Este projeto é um sistema de delivery que permite aos usuários comprar produtos e recebe-lôs em seu endereço. Ele inclui um backend em Node.js com banco de dados MongoDB.
 
-
 # Justificativas das escolhas de projeto e implementação
 
 ## Tecnologias utilizadas
@@ -29,14 +28,13 @@ Escolhido por ser um framework leve e flexível para construir aplicações web 
 
 Por ser banco de dados NoSQL de alto desempenho e escalabilidade horizontal, adequado para aplicações que precisam armazenar grandes volumes de dados não estruturados
 
-## Mogoose como biblioteca
+## Mongoose como biblioteca
 
 Simplifica a interação com o banco de dados MongoDB, permitindo a definição de modelos de dados com validação de tipos e campos obrigatórios, facilitando a implementação de operações de CRUD.
 Isso torna o desenvolvimento mais produtivo e menos propenso a erros, além de permitir a evolução do schema do banco de dados de forma organizada e controlada.
 
 
-
-## Fases do projeto 
+# Fases do projeto 
 
 - [ ] 1. **MVP**: Fase do desenvolvimento da API, que envolve a criação das funcionalidades básicas para que a aplicação possa ser utilizada pelos usuários;
 
