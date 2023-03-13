@@ -25,7 +25,6 @@ export class AddItemToBagController implements IAddItemToBagController {
 
       const requiredFields = ['item', 'quantity'];
 
-      // if fields is valid
       for (const field of requiredFields) {
         if (!httpRequest?.body?.[field as keyof AddItemToBagProps]) {
           return {
