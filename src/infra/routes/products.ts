@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { GetProductByIdController } from '../controllers/product/get-product/get-product';
 import { GetProductsController } from '../controllers/product/get-products/get-products';
 import { RegisterProductController } from '../controllers/product/register-product/resgister-product';
 import { UpdateProductController } from '../controllers/product/update-product/update-product';
@@ -22,11 +23,20 @@ productsRouter.post('/', async (req: Request, res: Response) => {
   return res.status(statusCode).json(body);
 });
 
-productsRouter.patch('/:id',async (req: Request, res: Response) => {
+productsRouter.patch('/:id', async (req: Request, res: Response) => {
   const updateProductController = new UpdateProductController();
   const { statusCode, body } = await updateProductController.execute({
     params: req.params,
-    body: req.body
+    body: req.body,
+  });
+
+  return res.status(statusCode).json(body);
+});
+
+productsRouter.get('/:id', async (req: Request, res: Response) => {
+  const getProductByIdController = new GetProductByIdController();
+  const { statusCode, body } = await getProductByIdController.execute({
+    params: req.params,
   });
 
   return res.status(statusCode).json(body);
