@@ -1,6 +1,6 @@
-import { IGetUsersRepository } from '~/infra/controllers/get-users/protocols';
 import { User } from '~/appplication/interfaces/user';
 import { UserODM } from '~/appplication/models/user-odm';
+import { IGetUsersRepository } from '~/infra/controllers/user/get-users/protocols';
 
 export class MongoGetUsersRepository implements IGetUsersRepository {
   constructor(private _model: UserODM = new UserODM()) {}

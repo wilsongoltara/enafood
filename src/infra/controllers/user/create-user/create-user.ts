@@ -1,7 +1,7 @@
 import { User } from '~/appplication/interfaces/user';
-import { MongoCreateUserRepository } from '~/infra/repositories/create-user/mongo-create-user';
-import { badRequest, created, internalError } from '../helpers';
-import { HttpRequest, HttpResponse, IController } from '../protocols';
+import { MongoCreateUserRepository } from '~/infra/repositories/user/create-user/mongo-create-user';
+import { badRequest, created, internalError } from '../../helpers';
+import { HttpRequest, HttpResponse, IController } from '../../protocols';
 import { CreateUserProps, ICreateUserRepository } from './protocols';
 
 export class CreateUserController implements IController {

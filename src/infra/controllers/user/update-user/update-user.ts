@@ -1,7 +1,7 @@
 import { User } from '~/appplication/interfaces/user';
-import { MongoUpdateUserRepository } from '~/infra/repositories/update-user/mongo-update-user';
-import { badRequest, internalError, ok } from '../helpers';
-import { HttpRequest, HttpResponse, IController } from '../protocols';
+import { MongoUpdateUserRepository } from '~/infra/repositories/user/update-user/mongo-update-user';
+import { badRequest, internalError, ok } from '../../helpers';
+import { HttpRequest, HttpResponse, IController } from '../../protocols';
 import { IUpdateUserRepository, UpdateUserProps } from './protocols';
 
 export class UpdateUserController implements IController {

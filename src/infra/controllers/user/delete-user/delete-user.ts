@@ -1,7 +1,7 @@
 import { User } from '~/appplication/interfaces/user';
-import { MongoDeleteUserRepository } from '~/infra/repositories/delete-user/mongo-delete-user';
-import { badRequest, internalError, ok } from '../helpers';
-import { HttpRequest, HttpResponse, IController } from '../protocols';
+import { MongoDeleteUserRepository } from '~/infra/repositories/user/delete-user/mongo-delete-user';
+import { badRequest, internalError, ok } from '../../helpers';
+import { HttpRequest, HttpResponse, IController } from '../../protocols';
 import { IDeleteUserRepository } from './protocols';
 
 export class DeleteUserController implements IController {
@@ -9,7 +9,9 @@ export class DeleteUserController implements IController {
     private readonly deleteUserRepository: IDeleteUserRepository = new MongoDeleteUserRepository()
   ) {}
 
-  async execute(httpRequest: HttpRequest<any>): Promise<HttpResponse<User | string>> {
+  async execute(
+    httpRequest: HttpRequest<any>
+  ): Promise<HttpResponse<User | string>> {
     try {
       const id = httpRequest?.params?.id;
 

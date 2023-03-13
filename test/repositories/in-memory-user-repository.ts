@@ -7,12 +7,12 @@ import {
 import {
   CreateUserProps,
   ICreateUserRepository,
-} from '~/infra/controllers/create-user/protocols';
-import { IGetUsersRepository } from '~/infra/controllers/get-users/protocols';
+} from '~/infra/controllers/user/create-user/protocols';
+import { IGetUsersRepository } from '~/infra/controllers/user/get-users/protocols';
 import {
   IUpdateUserRepository,
   UpdateUserProps,
-} from '~/infra/controllers/update-user/protocols';
+} from '~/infra/controllers/user/update-user/protocols';
 
 export class InMemoryGetUsersRepository implements IGetUsersRepository {
   public users: User[] = [];

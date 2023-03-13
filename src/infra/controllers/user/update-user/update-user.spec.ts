@@ -1,30 +1,32 @@
-import { InMemoryUpdateUserRepository } from "test/repositories/in-memory-user-repository";
-import { expect, test } from "vitest";
-import { User } from "~/appplication/interfaces/user";
-import { UpdateUserProps } from "./protocols";
-import { UpdateUserController } from "./update-user";
+import { InMemoryUpdateUserRepository } from 'test/repositories/in-memory-user-repository';
+import { expect, test } from 'vitest';
+import { User } from '~/appplication/interfaces/user';
+import { UpdateUserProps } from './protocols';
+import { UpdateUserController } from './update-user';
 
 test('update a user', async () => {
   const inMemoryUpdateUserRepository = new InMemoryUpdateUserRepository();
-  const updateUserController = new UpdateUserController(inMemoryUpdateUserRepository);
+  const updateUserController = new UpdateUserController(
+    inMemoryUpdateUserRepository
+  );
 
   const user: User = {
     id: '640e581823c41b27aa35599c',
     name: 'user test',
     email: 'test@test.com',
     adress: 'brazil',
-    bag: []
+    bag: [],
   };
 
   inMemoryUpdateUserRepository.users.push(user);
 
   const update: UpdateUserProps = {
-    adress: 'São Mateus, Brazil'
-  }
+    adress: 'São Mateus, Brazil',
+  };
 
   const { statusCode, body } = await updateUserController.execute({
     params: { id: user.id },
-    body: update
+    body: update,
   });
 
   expect(statusCode).toEqual(200);
@@ -33,25 +35,27 @@ test('update a user', async () => {
 
 test('No update user without id', async () => {
   const inMemoryUpdateUserRepository = new InMemoryUpdateUserRepository();
-  const updateUserController = new UpdateUserController(inMemoryUpdateUserRepository);
+  const updateUserController = new UpdateUserController(
+    inMemoryUpdateUserRepository
+  );
 
   const user: User = {
     id: '640e581823c41b27aa35599c',
     name: 'user test',
     email: 'test@test.com',
     adress: 'brazil',
-    bag: []
+    bag: [],
   };
 
   inMemoryUpdateUserRepository.users.push(user);
 
   const update: UpdateUserProps = {
-    adress: 'São Mateus, Brazil'
-  }
+    adress: 'São Mateus, Brazil',
+  };
 
   const { statusCode, body } = await updateUserController.execute({
     params: {},
-    body: update
+    body: update,
   });
 
   expect(statusCode).toEqual(400);
@@ -60,14 +64,16 @@ test('No update user without id', async () => {
 
 test('No update user with invalid props', async () => {
   const inMemoryUpdateUserRepository = new InMemoryUpdateUserRepository();
-  const updateUserController = new UpdateUserController(inMemoryUpdateUserRepository);
+  const updateUserController = new UpdateUserController(
+    inMemoryUpdateUserRepository
+  );
 
   const user: User = {
     id: '640e581823c41b27aa35599c',
     name: 'user test',
     email: 'test@test.com',
     adress: 'brazil',
-    bag: []
+    bag: [],
   };
 
   inMemoryUpdateUserRepository.users.push(user);
@@ -78,9 +84,9 @@ test('No update user with invalid props', async () => {
 
   const { statusCode, body } = await updateUserController.execute({
     params: { id: user.id },
-    body: update
+    body: update,
   });
 
   expect(statusCode).toEqual(400);
   expect(body).toEqual('Some received field is not allowed');
-}); 
+});

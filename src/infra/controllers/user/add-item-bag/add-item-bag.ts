@@ -1,6 +1,6 @@
-import { MongoAddItemBagRepository } from '~/infra/repositories/add-item-bag/mongo-add-item-bag';
-import { badRequest, internalError, ok } from '../helpers';
-import { HttpRequest, HttpResponse, IController } from '../protocols';
+import { MongoAddItemBagRepository } from '~/infra/repositories/user/add-item-bag/mongo-add-item-bag';
+import { badRequest, internalError, ok } from '../../helpers';
+import { HttpRequest, HttpResponse, IController } from '../../protocols';
 import {
   AddItemToBagProps,
   AddItemToBagResponse,

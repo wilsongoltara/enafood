@@ -1,7 +1,7 @@
 import { InMemoryGetUsersRepository } from 'test/repositories/in-memory-user-repository';
 import { expect, test } from 'vitest';
-import { GetUserController } from './get-users';
 import { User } from '~/appplication/interfaces/user';
+import { GetUserController } from './get-users';
 
 test('get all users', async () => {
   const inMemoryGetUsersRepository = new InMemoryGetUsersRepository();
@@ -12,10 +12,8 @@ test('get all users', async () => {
     name: 'user test',
     email: 'test@test.com',
     adress: 'brazil',
-    bag: {
-      items: ['x-tudo'],
-    }
-  }
+    bag: ['x-tudo'],
+  };
   inMemoryGetUsersRepository.users.push(user1);
 
   const user2: User = {
@@ -23,14 +21,12 @@ test('get all users', async () => {
     name: 'user test',
     email: 'test@test.com',
     adress: 'germany',
-    bag: {
-      items: ['pizza'],
-    }
-  }
+    bag: ['pizza'],
+  };
   inMemoryGetUsersRepository.users.push(user2);
 
   const { statusCode, body } = await getUsersController.execute();
-  
+
   expect(statusCode).toEqual(200);
   expect(body.length).toEqual(2);
   expect(body[0]).toBeTypeOf(typeof user1);

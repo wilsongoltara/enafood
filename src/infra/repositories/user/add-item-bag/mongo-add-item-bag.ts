@@ -1,9 +1,9 @@
 import { UserODM } from '~/appplication/models/user-odm';
 import {
   AddItemToBagProps,
+  AddItemToBagResponse,
   IAddItemToBagRepository,
-} from '~/infra/controllers/add-item-bag/protocols';
-import { AddItemToBagResponse } from '../../controllers/add-item-bag/protocols';
+} from '~/infra/controllers/user/add-item-bag/protocols';
 
 export class MongoAddItemBagRepository implements IAddItemToBagRepository {
   constructor(private _model: UserODM = new UserODM()) {}
@@ -22,7 +22,7 @@ export class MongoAddItemBagRepository implements IAddItemToBagRepository {
       const positionItem = userWithBag.bag.findIndex(
         (itemBag) => itemBag.item === props.item
       );
-      
+
       if (positionItem !== -1) {
         userWithBag.bag[positionItem].quantity += props.quantity;
       } else {
