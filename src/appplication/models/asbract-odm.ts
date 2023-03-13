@@ -32,4 +32,9 @@ export class AbstractODM<T> {
     );
     return updated;
   }
+
+  public async deleteOne(id: string): Promise<number> {
+    const { deletedCount } = await this.model.deleteOne({ _id: id });
+    return deletedCount;
+  }
 }
