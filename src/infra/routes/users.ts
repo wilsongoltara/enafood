@@ -3,6 +3,7 @@ import { AddItemToBagController } from '../controllers/user/add-item-bag/add-ite
 import { CreateUserController } from '../controllers/user/create-user/create-user';
 import { DeleteUserController } from '../controllers/user/delete-user/delete-user';
 import { GetUserController } from '../controllers/user/get-users/get-users';
+import { RemoveItemToBagController } from '../controllers/user/remove-item-bag/remove-item-bag';
 import { UpdateUserController } from '../controllers/user/update-user/update-user';
 
 const usersRouter = Router();
@@ -47,5 +48,18 @@ usersRouter.patch('/add-item-bag/:id', async (req: Request, res: Response) => {
 
   return res.status(statusCode).json(body);
 });
+
+usersRouter.patch(
+  '/remove-item-bag/:id',
+  async (req: Request, res: Response) => {
+    const removeItemToBagController = new RemoveItemToBagController();
+    const { statusCode, body } = await removeItemToBagController.execute({
+      body: req.body,
+      params: req.params,
+    });
+
+    return res.status(statusCode).json(body);
+  }
+);
 
 export default usersRouter;
