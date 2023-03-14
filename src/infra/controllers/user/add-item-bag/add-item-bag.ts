@@ -27,7 +27,7 @@ export class AddItemToBagController implements IController {
         return badRequest('Missing fields');
       }
 
-      const requiredFields = ['item', 'quantity'];
+      const requiredFields = ['productId', 'quantity'];
 
       for (const field of requiredFields) {
         if (!httpRequest?.body?.[field as keyof AddItemToBagProps]) {

@@ -18,7 +18,7 @@ export class UserODM extends AbstractODM<User> {
         required: true,
       },
       bag: {
-        type: [{ item: String, quantity: Number }],
+        type: [{ nameProduct: String, price: Number, quantity: Number }],
       },
     });
 

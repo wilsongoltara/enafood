@@ -1,10 +1,12 @@
+import { BagItem } from '~/appplication/interfaces/user';
+
 export interface AddItemToBagProps {
-  item: any;
+  productId: string;
   quantity: number;
 }
 
 export interface AddItemToBagResponse {
-  bag: Array<AddItemToBagProps>;
+  bag: Array<BagItem>;
 }
 
 export interface IAddItemToBagRepository {

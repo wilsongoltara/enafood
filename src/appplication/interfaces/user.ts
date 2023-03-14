@@ -1,9 +1,13 @@
-import { AddItemToBagProps } from "~/infra/controllers/add-item-bag/protocols";
+export interface BagItem {
+  nameProduct: string;
+  price: number;
+  quantity: number;
+}
 
 export interface User {
   id?: string;
   name: string;
   email: string;
   adress: string;
-  bag: Array<AddItemToBagProps>;
+  bag: Array<BagItem>;
 }
