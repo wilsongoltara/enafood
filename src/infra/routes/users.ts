@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import { AddItemToBagController } from '../controllers/user/add-item-bag/add-item-bag';
 import { CreateUserController } from '../controllers/user/create-user/create-user';
 import { DeleteUserController } from '../controllers/user/delete-user/delete-user';
+import { FinalizeOrderController } from '../controllers/user/finalize-order/finalize-order';
 import { GetUserController } from '../controllers/user/get-users/get-users';
 import { RemoveItemToBagController } from '../controllers/user/remove-item-bag/remove-item-bag';
 import { UpdateUserController } from '../controllers/user/update-user/update-user';
@@ -17,6 +18,15 @@ usersRouter.get('/', async (_req: Request, res: Response) => {
 usersRouter.post('/', async (req: Request, res: Response) => {
   const createUsers = new CreateUserController();
   const { statusCode, body } = await createUsers.execute({ body: req.body });
+  res.status(statusCode).json(body);
+});
+
+usersRouter.post('/:id/finalize-order', async (req: Request, res: Response) => {
+  const finalizeOrder = new FinalizeOrderController();
+  const { statusCode, body } = await finalizeOrder.execute({
+    params: req.params,
+    body: req.body 
+  });
   res.status(statusCode).json(body);
 });
 
