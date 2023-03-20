@@ -12,7 +12,13 @@ test('get all users', async () => {
     name: 'user test',
     email: 'test@test.com',
     adress: 'brazil',
-    bag: ['x-tudo'],
+    bag: [
+      {
+        nameProduct: 'x-tudo',
+        price: 19.99,
+        quantity: 1,
+      },
+    ],
   };
   inMemoryGetUsersRepository.users.push(user1);
 
@@ -21,7 +27,13 @@ test('get all users', async () => {
     name: 'user test',
     email: 'test@test.com',
     adress: 'germany',
-    bag: ['pizza'],
+    bag: [
+      {
+        nameProduct: 'pizza marguerita',
+        price: 59.99,
+        quantity: 2,
+      },
+    ],
   };
   inMemoryGetUsersRepository.users.push(user2);
 

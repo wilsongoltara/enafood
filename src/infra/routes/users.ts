@@ -25,7 +25,7 @@ usersRouter.post('/:id/finalize-order', async (req: Request, res: Response) => {
   const finalizeOrder = new FinalizeOrderController();
   const { statusCode, body } = await finalizeOrder.execute({
     params: req.params,
-    body: req.body 
+    body: req.body,
   });
   res.status(statusCode).json(body);
 });
