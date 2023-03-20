@@ -1,4 +1,4 @@
-# Sistema de delivery EnaFood
+# Sistema de delivery EnaFood - construção
 
 Este projeto é um sistema de delivery que permite aos usuários comprar produtos e recebe-lôs em seu endereço. Ele inclui um backend em Node.js com banco de dados MongoDB.
 
@@ -11,6 +11,31 @@ Este projeto é um sistema de delivery que permite aos usuários comprar produto
 - Express.js
 - MongoDB
 - Mongoose
+
+## Instalação
+```bash
+
+# clona reposítório
+$ git clone https://github.com/wilsongoltara/enafood
+
+# entra no diretório do projeto
+$ cd enafood
+
+# instala as dependências
+$ npm install
+
+# Executa a aplicação
+$ npm run dev
+
+# or
+
+# instala dependências do projeto
+$ yarn
+
+# Executa a aplicação
+$ yarn dev
+
+```
 
 ## Node.js como linguagem de programação
 
