@@ -78,6 +78,7 @@ test('No update user with invalid props', async () => {
 
   inMemoryUpdateUserRepository.users.push(user);
 
+  // props with invalid key
   const update = {
     address: 'São Mateus, Brazil',
   };
